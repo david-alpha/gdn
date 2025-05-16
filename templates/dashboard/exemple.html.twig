@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+<!-- Tableau des tâches -->
+<div class="mt-4">
+  <h6>Tâches à faire</h6>
+  <table class="table table-hover bg-white shadow-sm">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">Tâche</th>
+        <th scope="col">Date limite</th>
+        <th scope="col">Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Préparer la réunion de lundi</td>
+        <td>20/05/2025</td>
+        <td><span class="badge bg-warning text-dark">En cours</span></td>
+      </tr>
+      <tr>
+        <td>Envoyer le rapport trimestriel</td>
+        <td>22/05/2025</td>
+        <td><span class="badge bg-success">Terminé</span></td>
+      </tr>
+      <tr>
+        <td>Organiser la formation</td>
+        <td>25/05/2025</td>
+        <td><span class="badge bg-danger">En retard</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Bloc des notes -->
+<div class="mt-5">
+  <h6>Mes notes</h6>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h6 class="card-title">Note rapide</h6>
+          <p class="card-text">Appeler le client X avant vendredi.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h6 class="card-title">À intégrer dans le rapport</h6>
+          <p class="card-text">Mentionner les KPIs du mois de mai.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h6 class="card-title">Rappel</h6>
+          <p class="card-text">Préparer le tableau comparatif pour lundi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

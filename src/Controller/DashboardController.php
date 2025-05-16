@@ -15,4 +15,11 @@ final class DashboardController extends AbstractController
             'controller_name' => 'DashboardController',
         ]);
     }
+	#[Route('/dashboardExemple', name: 'app_dashboard_exemple')]
+    public function dashboardExemple(): Response
+    {
+        return $this->render('dashboard/exemple.html.twig', [
+            'controller_name' => 'DashboardController',
+        ]);
+    }
 }
