@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Note index{% endblock %}
+
+{% block body %}
+    <h1>Note index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>EndAt</th>
+                <th>Propriete</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for note in notes %}
+            <tr>
+                <td>{{ note.id }}</td>
+                <td>{{ note.titre }}</td>
+                <td>{{ note.description }}</td>
+                <td>{{ note.createdAt ? note.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ note.endAt ? note.endAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ note.propriete }}</td>
+                <td>
+                    <a href="{{ path('app_note_show', {'id': note.id}) }}">show</a>
+                    <a href="{{ path('app_note_edit', {'id': note.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_note_new') }}">Create new</a>
+{% endblock %}
