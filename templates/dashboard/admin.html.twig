@@ -5,10 +5,15 @@
 {% block body %}
 <!-- Tableau des tâches -->
 <div class="mt-4">
+
   <h6>Liste Users</h6>
+  
+  
   {% for item in users %}
 	{{ item.nom }} - {{ item.prenom }} <br>
   {% endfor %}
+  
+  
   </div>
 
 {% endblock %}

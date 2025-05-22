@@ -1,19 +1,66 @@
-{% extends 'base.html.twig' %}
+{% extends 'login.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center mb-4">Inscrivez-vous</h1>
 
-    {{ form_errors(registrationForm) }}
+                <!-- Affichage des erreurs du formulaire -->
+                {% if form_errors(registrationForm) %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {{ form_errors(registrationForm) }}
+                        </ul>
+                    </div>
+                {% endif %}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                {{ form_start(registrationForm, { 'attr': {'novalidate': 'novalidate'} }) }}
+                
+                <!-- Champs du formulaire -->
+                <div class="mb-3">
+                    {{ form_row(registrationForm.nom, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                <div class="mb-3">
+                    {{ form_row(registrationForm.prenom, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_row(registrationForm.email, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+
+                <!-- Mot de passe (premier champ) -->
+                <div class="mb-3">
+                    {{ form_row(registrationForm.plainPassword, { 
+                        'label': 'Mot de passe',
+                        'attr': { 
+                            'class': 'form-control', 
+                            'minlength': 8,
+                            'pattern': '(?=.*[!@#$%^&*])',
+                            'placeholder': 'Votre mot de passe (8 caractères minimum, incluant un caractère spécial)'
+                        }
+                    }) }}
+                    <small class="form-text text-muted">Au moins 8 caractères, incluant un caractère spécial.</small>
+                </div>
+
+               
+
+                <div class="form-check mb-3">
+                    {{ form_row(registrationForm.agreeTerms, { 
+                        'attr': { 'class': 'form-check-input' }
+                    }) }}
+                    <label class="form-check-label" for="agreeTerms">J'accepte les termes et conditions</label>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+                </div>
+                
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

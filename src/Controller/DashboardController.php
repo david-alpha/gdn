@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class DashboardController extends AbstractController
 {
-	#[IsGranted('ROLE_USER', 'ROLE_ADMIN')]
+	#[IsGranted('ROLE_USER')]
     #[Route('/dashboard', name: 'app_dashboard')]
     public function index(): Response
     {
@@ -38,7 +38,7 @@ final class DashboardController extends AbstractController
     {
 		//récupération de tous les users
         $users = $entityManager->getRepository(User::class)->findAll();
-		//ce retrun renvoie vers template/dashboard/admin
+		//ce return renvoie vers template/dashboard/admin
 		return $this->render('dashboard/admin.html.twig', [
             'users' => $users,
         ]);
