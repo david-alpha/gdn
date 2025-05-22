@@ -10,10 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/etat')]
 final class EtatController extends AbstractController
 {
+	#[IsGranted('ROLE_ADMIN')]
     #[Route(name: 'app_etat_index', methods: ['GET'])]
     public function index(EtatRepository $etatRepository): Response
     {
@@ -22,6 +24,7 @@ final class EtatController extends AbstractController
         ]);
     }
 
+	#[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'app_etat_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,6 +45,7 @@ final class EtatController extends AbstractController
         ]);
     }
 
+	#[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_etat_show', methods: ['GET'])]
     public function show(Etat $etat): Response
     {
@@ -50,6 +54,7 @@ final class EtatController extends AbstractController
         ]);
     }
 
+	#[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_etat_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Etat $etat, EntityManagerInterface $entityManager): Response
     {
@@ -68,6 +73,7 @@ final class EtatController extends AbstractController
         ]);
     }
 
+	#[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_etat_delete', methods: ['POST'])]
     public function delete(Request $request, Etat $etat, EntityManagerInterface $entityManager): Response
     {
