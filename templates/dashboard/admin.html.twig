@@ -3,17 +3,77 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
+<!-- Formulaire -->
+<div class="container mt-4">
+    <form method="post" action="{{ path('formulaire_exemple') }}">
+        <div class="mb-3">
+            <label for="exemple_input" class="form-label">Saisir un texte :</label>
+            <input type="text" class="form-control" id="exemple_input" name="exemple_input" placeholder="Entrez une valeur">
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
+</div>
 <!-- Tableau des tâches -->
-<div class="mt-4">
+<div class="container mt-4">
+    <h1>Admin – Notes filtrées avec Criteria</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <h5 class="text-primary">📌 Notes "En cours"</h5>
+            <ul class="list-group">
+                {% for note in notes_en_cours %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ note.titre }}
+                        <span class="badge bg-warning text-dark">{{ note.etat.nom }}</span>
+                    </li>
+                {% else %}
+                    <li class="list-group-item">Aucune note en cours</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-  <h6>Liste Users</h6>
-  
-  
-  {% for item in users %}
-	{{ item.nom }} - {{ item.prenom }} <br>
-  {% endfor %}
-  
-  
-  </div>
+        <div class="col-md-4">
+            <h5 class="text-danger">⚡ Notes urgentes</h5>
+            <ul class="list-group">
+                {% for note in notes_urgentes %}
+                    <li class="list-group-item">
+                        {{ note.titre }}<br>
+                        <small class="text-muted">{{ note.etat.nom }}</small>
+                    </li>
+                {% else %}
+                    <li class="list-group-item">Aucune note urgente</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="col-md-4">
+            <h5 class="text-success">👤 Toutes vos notes</h5>
+            <ul class="list-group">
+                {% for note in notes_utilisateur %}
+                    <li class="list-group-item">
+                        {{ note.titre }}<br>
+                        <small class="text-muted">{{ note.etat.nom }}</small>
+                    </li>
+                {% else %}
+                    <li class="list-group-item">Aucune note trouvée</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+	<div class="row">
+        <div class="col-md-4">
+            <h5 class="text-primary">📌 Notes "En cours"</h5>
+            <ul class="list-group">
+                {% for note in notes_en_cours2 %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ note.titre }}
+                        <span class="badge bg-warning text-dark">{{ note.etat.nom }}</span>
+                    </li>
+                {% else %}
+                    <li class="list-group-item">Aucune note en cours</li>
+                {% endfor %}
+            </ul>
+        </div>
+	</div>
+</div>
 
 {% endblock %}
