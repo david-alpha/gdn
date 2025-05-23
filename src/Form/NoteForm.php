@@ -18,24 +18,19 @@ class NoteForm extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
+            
             ->add('endAt', null, [
                 'widget' => 'single_text',
             ])
             ->add('propriete')
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+           
             ->add('etat', EntityType::class, [
                 'class' => Etat::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('tag', EntityType::class, [
                 'class' => Tag::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
             ])
         ;

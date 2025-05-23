@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/note')]
 final class NoteController extends AbstractController
 {
-	#[IsGranted('ROLE_USER')]
+	#[IsGranted('ROLE_ADMIN')]
     #[Route(name: 'app_note_index', methods: ['GET'])]
     public function index(NoteRepository $noteRepository): Response
     {
@@ -25,7 +25,7 @@ final class NoteController extends AbstractController
         ]);
     }
 
-	#[IsGranted('ROLE_USER')]
+	#[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'app_note_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -34,6 +34,7 @@ final class NoteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+			$note->setUser($this->getUser());
             $entityManager->persist($note);
             $entityManager->flush();
 
@@ -46,7 +47,7 @@ final class NoteController extends AbstractController
         ]);
     }
 
-	#[IsGranted('ROLE_USER')]
+	#[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_note_show', methods: ['GET'])]
     public function show(Note $note): Response
     {
@@ -55,7 +56,7 @@ final class NoteController extends AbstractController
         ]);
     }
 
-	#[IsGranted('ROLE_USER')]
+	#[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_note_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Note $note, EntityManagerInterface $entityManager): Response
     {
@@ -74,7 +75,7 @@ final class NoteController extends AbstractController
         ]);
     }
 
-	#[IsGranted('ROLE_USER')]
+	#[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_note_delete', methods: ['POST'])]
     public function delete(Request $request, Note $note, EntityManagerInterface $entityManager): Response
     {
